@@ -4,8 +4,11 @@ const DEFAULT_FILTERS = {
   minPrice: 0,
   maxPrice: 5000000,
   beds: 'any',
+  baths: 'any',
   type: 'any',
-  city: 'any'
+  city: 'any',
+  sort: 'newest',
+  search: ''
 }
 
 export default function useFilters() {

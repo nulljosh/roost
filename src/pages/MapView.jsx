@@ -1,9 +1,9 @@
 import React from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import MapMarker from '../components/MapMarker.jsx'
+import FilterBar from '../components/FilterBar.jsx'
 import useListings from '../hooks/useListings.js'
 import useFilters from '../hooks/useFilters.js'
-import FilterBar from '../components/FilterBar.jsx'
 
 const BC_CENTER = [49.2827, -123.1207]
 const BC_ZOOM = 7
@@ -14,12 +14,10 @@ export default function MapView() {
 
   return (
     <div className="map-view">
-      <aside className="map-sidebar">
-        <div className="map-sidebar__header">
-          <span className="result-count">{listings.length} listings</span>
-        </div>
-        <FilterBar filters={filters} onFilterChange={updateFilter} onReset={resetFilters} />
-      </aside>
+      <div className="map-filters-bar">
+        <FilterBar filters={filters} onFilterChange={updateFilter} onReset={resetFilters} horizontal />
+        <span className="result-count">{listings.length} listings</span>
+      </div>
       <div className="map-container">
         <MapContainer
           center={BC_CENTER}
@@ -35,6 +33,7 @@ export default function MapView() {
             <MapMarker key={listing.id} listing={listing} />
           ))}
         </MapContainer>
+        <div className="map-glow" />
       </div>
     </div>
   )

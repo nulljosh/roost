@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 export default function ImageCarousel({ images, alt, className }) {
   const [index, setIndex] = useState(0)
+  const touchRef = useRef(null)
   const imgs = images && images.length > 0 ? images : []
 
   if (imgs.length === 0) {
@@ -20,8 +21,28 @@ export default function ImageCarousel({ images, alt, className }) {
     setIndex(i => (i + 1) % imgs.length)
   }
 
+  function onTouchStart(e) {
+    touchRef.current = e.touches[0].clientX
+  }
+
+  function onTouchEnd(e) {
+    if (touchRef.current === null) return
+    const delta = e.changedTouches[0].clientX - touchRef.current
+    touchRef.current = null
+    if (Math.abs(delta) < 40) return
+    if (delta < 0) {
+      setIndex(i => (i + 1) % imgs.length)
+    } else {
+      setIndex(i => (i - 1 + imgs.length) % imgs.length)
+    }
+  }
+
   return (
-    <div className={`carousel ${className || ''}`}>
+    <div
+      className={`carousel ${className || ''}`}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <img
         src={imgs[index]}
         alt={`${alt} - photo ${index + 1}`}

@@ -42,7 +42,19 @@ export default function ListingDetail() {
 
   const images = listing.images || []
   const similar = listings
-    .filter(l => l.id !== listing.id && l.city === listing.city && l.type === listing.type)
+    .filter(l => l.id !== listing.id)
+    .map(l => {
+      let score = 0
+      if (l.city === listing.city) score += 3
+      if (l.type === listing.type) score += 2
+      const priceDiff = Math.abs(l.price - listing.price) / listing.price
+      if (priceDiff < 0.2) score += 2
+      else if (priceDiff < 0.4) score += 1
+      if (Math.abs(l.beds - listing.beds) <= 1) score += 1
+      return { ...l, _score: score }
+    })
+    .filter(l => l._score >= 3)
+    .sort((a, b) => b._score - a._score)
     .slice(0, 3)
 
   return (

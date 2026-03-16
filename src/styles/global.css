@@ -1365,10 +1365,18 @@ input, select {
     grid-row: auto;
   }
 
+  .map-filters-bar,
+  .list-toolbar {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+  }
+
   .filter-bar--horizontal {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .favorites-view {

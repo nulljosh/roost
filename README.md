@@ -19,19 +19,24 @@ BC real estate listings PWA with interactive maps, photo galleries, and filterin
 
 ```bash
 npm install && npm run dev
+npm run build
 ```
-
-## Deploy
-
 Vercel or `npm run build` for static hosting.
 
 ## Roadmap
 
-- Real MLS data integration
-- User accounts and saved searches
-- Neighborhood stats and school ratings
-- Mortgage calculator
+- [ ] Real MLS data integration
+- [ ] User accounts, saved searches, and mortgage calculator
+- [ ] Neighborhood stats and school ratings
+
+## Changelog
+
+### v1.0.0
+
+- Built Leaflet map with Zillow-style price pill markers and 50 mock BC listings.
+- Added photo carousels with swipe/lightbox and listing detail experiences.
+- Implemented search, filters, sorting, favorites, and similar homes.
 
 ## License
 
-MIT 2026, Joshua Trommel
+MIT 2026 Joshua Trommel

@@ -1,7 +1,13 @@
 {
   "name": "roost",
+  "license": "MIT",
   "description": "Browse homes anywhere on earth, in the local currency and language.",
-  "keywords": ["real-estate", "homes", "currency", "i18n"],
+  "keywords": [
+    "real-estate",
+    "homes",
+    "currency",
+    "i18n"
+  ],
   "private": true,
   "version": "3.0.0",
   "type": "module",

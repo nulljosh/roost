@@ -29,7 +29,7 @@ fun RoostTheme(content: @Composable () -> Unit) =
     MaterialTheme(colorScheme = lightColorScheme(), content = content)
 
 // ponytail: no real street anchors (Overpass not ported, see Geo.kt) and no
-// i18n (the web app has 26 languages, this is English-only). Search +
+// i18n (the web app has 25 languages, this is English-only). Search +
 // seeded listing generation are both real and match the web app's output
 // shape and math.
 @Composable

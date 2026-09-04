@@ -18,7 +18,7 @@
 ## Worldwide build 2026-08-28
 Web app now browses anywhere on earth: Nominatim place search, real local street
 names from Overpass, per-country currency/units/price levels, sale and rent
-modes, and UI strings in 26 languages with RTL.
+modes, and UI strings in 25 languages with RTL.
 
 - [ ] Native iOS + macOS apps. Not started. One SwiftUI multiplatform target with
       MapKit, reusing the same market tables and generator ported to Swift.
@@ -30,7 +30,7 @@ modes, and UI strings in 26 languages with RTL.
 - [ ] Inventory is generated, not real. Shape matches an MLS/IDX response so a
       feed swap is one function (`generateListings`).
 - [ ] Rename check before any App Store record, run asc-name-creator.
-- [ ] Landing pitch is translated into 10 of the 26 languages; the rest fall back to English.
+- [ ] Landing pitch is translated into 10 of the 25 languages; the rest fall back to English.
 
 ## Demo pass 2026-08-30
 

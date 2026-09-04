@@ -23,7 +23,7 @@ currency, every label in the local language.
 - Real street names from OpenStreetMap for wherever you're looking
 - Currency, price levels, rental yields and ft² or m², per country
 - Sale and rent, with price filters cut to the local market's own scale
-- 26 languages, right-to-left included, picked from your browser
+- 25 languages, right-to-left included, picked from your browser
 - A map with price pills, filters and favourites
 - Supabase Auth: email and password, forgot password, sessions that stick
 

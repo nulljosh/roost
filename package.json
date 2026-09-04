@@ -1,5 +1,6 @@
 {
   "name": "roost",
+  "description": "Browse homes anywhere on earth, in the local currency and language.",
   "private": true,
   "version": "3.0.0",
   "type": "module",

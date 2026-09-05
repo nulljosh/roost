@@ -55,3 +55,6 @@ and the detail page's mislabelled area/year stats.
 - [ ] Login/Register/ForgotPassword copy is still English-only.
 - [ ] `npm test` runs two node files. No CI runs them.
 - [ ] 12 photos across 60 listings, so each image is the hero of 5 homes.
+
+## TUI pilot (2026-09-05)
+- `roost-tui` SwiftPM target (SwiftTUI). `swift build && ./.build/debug/roost-tui "Vancouver"` hits Nominatim directly, same public geocoding API src/lib/geo.js calls. Needs a real TTY.

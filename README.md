@@ -6,6 +6,8 @@
 
 **Live:** https://roost.heyitsmejosh.com
 
+**Terminal:** `swift build && ./.build/debug/roost-tui "Vancouver"` — see [tui/](tui/)
+
 Browse homes anywhere on earth.
 
 Type a city. Any city. Flip between for sale and for rent. Every price in the local

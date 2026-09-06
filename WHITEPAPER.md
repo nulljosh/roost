@@ -1,6 +1,6 @@
 # Roost Technical Whitepaper
 
-**v2.0.1** | August 2026
+**v3.0.0** | August 2026
 
 Browse homes anywhere on earth.
 

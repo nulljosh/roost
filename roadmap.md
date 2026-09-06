@@ -30,7 +30,7 @@ modes, and UI strings in 25 languages with RTL.
 - [ ] Inventory is generated, not real. Shape matches an MLS/IDX response so a
       feed swap is one function (`generateListings`).
 - [ ] Rename check before any App Store record, run asc-name-creator.
-- [ ] Landing pitch is translated into 10 of the 25 languages; the rest fall back to English.
+- [x] Landing pitch translated into all 26 languages (2026-09-06).
 
 ## Demo pass 2026-08-30
 

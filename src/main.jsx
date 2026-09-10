@@ -7,8 +7,6 @@ import { FavoritesProvider } from './context/FavoritesContext'
 import { FiltersProvider } from './context/FiltersContext'
 import { PlaceProvider } from './context/PlaceContext'
 import { I18nProvider } from './i18n'
-import 'animate.css'
-import 'leaflet/dist/leaflet.css'
 import './styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

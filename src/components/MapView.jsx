@@ -1,3 +1,4 @@
+import 'leaflet/dist/leaflet.css'
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'

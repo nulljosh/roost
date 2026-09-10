@@ -1,13 +1,14 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import Nav from './components/Nav'
 import Landing from './pages/Landing'
-import Listings from './pages/Listings'
-import ListingDetail from './pages/ListingDetail'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgotPassword from './pages/ForgotPassword'
-import Settings from './pages/Settings'
+const Listings = lazy(() => import('./pages/Listings'))
+const ListingDetail = lazy(() => import('./pages/ListingDetail'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
+const Settings = lazy(() => import('./pages/Settings'))
 import { WebMCP } from './lib/webmcp'
 
 function ProtectedRoute({ children }) {
@@ -25,6 +26,7 @@ export default function App() {
       <div className="noise-overlay" />
       {user && <Nav />}
       {user && <WebMCP />}
+      <Suspense fallback={<p role="status">Loading…</p>}>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -34,6 +36,7 @@ export default function App() {
         <Route path="/listing/:id" element={<ProtectedRoute><ListingDetail /></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
       </Routes>
+      </Suspense>
     </div>
   )
 }

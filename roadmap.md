@@ -58,3 +58,7 @@ and the detail page's mislabelled area/year stats.
 
 ## TUI pilot (2026-09-05)
 - `roost-tui` SwiftPM target (SwiftTUI). `swift build && ./.build/debug/roost-tui "Vancouver"` hits Nominatim directly, same public geocoding API src/lib/geo.js calls. Needs a real TTY.
+
+## 2026-09-10 loading cleanup
+
+Removed the unused animate.css import and dependency. App routes load on demand; Leaflet CSS travels with the map. The main JavaScript bundle is 437 kB, with the 162 kB listings bundle separate. Build and both test suites pass. Existing test CI was verified in .github/workflows/test.yml.

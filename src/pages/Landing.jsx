@@ -1,10 +1,38 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useI18n, supportedLanguages, languageLabel } from '../i18n'
 import { rtlLanguages } from '../i18n/strings'
 import { coverage } from '../lib/market'
 import { photos } from '../data/listings'
 import './Landing.css'
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+// Reveals a section once it scrolls into view. Returns [ref, className] where
+// className is '' until intersecting, then 'reveal in-view' (or just always
+// visible if the visitor has reduced motion on).
+function useRevealOnScroll() {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(prefersReducedMotion())
+
+  useEffect(() => {
+    if (prefersReducedMotion() || !ref.current || !('IntersectionObserver' in window)) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.15 }
+    )
+    io.observe(ref.current)
+    return () => io.disconnect()
+  }, [])
+
+  return [ref, inView]
+}
 
 // A slow-drifting wall of listing photos behind the hero, same shape as the
 // bookrank landing. Built in JS because the column count depends on viewport
@@ -33,9 +61,30 @@ function buildWall(el) {
 export default function Landing() {
   const wallRef = useRef(null)
   const { t } = useI18n()
+  const [statsRef, statsIn] = useRevealOnScroll()
+  const [howRef, howIn] = useRevealOnScroll()
+  const [langRef, langIn] = useRevealOnScroll()
+  const [honestRef, honestIn] = useRevealOnScroll()
+  const [ctaRef, ctaIn] = useRevealOnScroll()
 
   useEffect(() => {
     if (wallRef.current) buildWall(wallRef.current)
+  }, [])
+
+  // Parallax: the hero photo wall drifts slower than the page scrolls.
+  useEffect(() => {
+    if (prefersReducedMotion() || !wallRef.current) return
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        if (wallRef.current) wallRef.current.style.transform = `translateY(${window.scrollY * 0.12}px)`
+        ticking = false
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const stats = [
@@ -72,7 +121,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="landing-stats">
+      <section className={`landing-stats reveal${statsIn ? ' in-view' : ''}`} ref={statsRef}>
         <dl>
           {stats.map(([n, label]) => (
             <div key={label}>
@@ -83,7 +132,7 @@ export default function Landing() {
         </dl>
       </section>
 
-      <section className="landing-section">
+      <section className={`landing-section reveal${howIn ? ' in-view' : ''}`} ref={howRef}>
         <p className="section-label">{t('how_label')}</p>
         <h2>{t('how_title')}</h2>
         <div className="feature-grid">
@@ -96,7 +145,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="landing-section">
+      <section className={`landing-section reveal${langIn ? ' in-view' : ''}`} ref={langRef}>
         <p className="section-label">{t('lang_label')}</p>
         <h2>{t('lang_title')}</h2>
         <p className="section-body">{t('lang_body', { n: supportedLanguages.length })}</p>
@@ -109,13 +158,13 @@ export default function Landing() {
         </ul>
       </section>
 
-      <section className="landing-section">
+      <section className={`landing-section reveal${honestIn ? ' in-view' : ''}`} ref={honestRef}>
         <p className="section-label">{t('honest_label')}</p>
         <h2>{t('honest_title')}</h2>
         <p className="section-body">{t('honest_body')}</p>
       </section>
 
-      <section className="landing-cta">
+      <section className={`landing-cta reveal${ctaIn ? ' in-view' : ''}`} ref={ctaRef}>
         <h2>{t('cta_title')}</h2>
         <p>{t('cta_body')}</p>
         <Link to="/browse" className="btn btn-primary">{t('listings')}</Link>

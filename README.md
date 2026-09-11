@@ -3,6 +3,7 @@
 # Roost
 
 ![version](https://img.shields.io/badge/version-v3.0.0-blue)
+![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Froost-black?logo=github)](https://github.com/nulljosh/roost)
 
 **Live:** https://roost.heyitsmejosh.com
 

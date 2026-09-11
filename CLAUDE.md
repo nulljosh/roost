@@ -43,7 +43,7 @@ Pages dashboard.
 
 - src/main.jsx: App bootstrap and Vite entry
 - src/App.jsx: Routing and protected routes
-- src/context/AuthContext.jsx: Supabase Auth (session, profile in user_metadata)
+- src/context/AuthContext.jsx: Supabase Auth (session, profile in user_metadata, Apple/Google OAuth alongside email/password)
 - src/context/PlaceContext.jsx: Current place, sale/rent mode, locale
 - src/context/FavoritesContext.jsx: Favorites with localStorage sync
 - src/context/FiltersContext.jsx: Price, beds, type, sort filters

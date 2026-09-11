@@ -394,6 +394,41 @@ a:hover {
   margin: 1.25rem 0 1rem;
 }
 
+/* Apple HIG: black pill, SF text, logo left of label */
+.btn-apple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  height: 44px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.btn-apple:hover { background: #1a1a1a; }
+.btn-apple svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* Google Identity branding guidelines: white pill, #747775 border, Roboto, 4-color G */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: #1f1f1f;
+  border: 1px solid #747775;
+  border-radius: 8px;
+  height: 44px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: Roboto, var(--font);
+}
+.btn-google:hover { background: #f7f7f7; }
+.btn-google svg { width: 18px; height: 18px; flex-shrink: 0; }
+
 /* Responsive */
 @media (min-width: 768px) {
   .page {

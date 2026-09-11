@@ -71,6 +71,13 @@ export function AuthProvider({ children }) {
     return { success: true }
   }
 
+  async function loginWithOAuth(provider) {
+    if (!authConfigured) return { error: 'Sign-in is not configured on this deployment.' }
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: window.location.origin } })
+    if (error) return { error: error.message }
+    return { success: true }
+  }
+
   async function register(name, email, password) {
     if (!authConfigured) return { error: 'Sign-in is not configured on this deployment.' }
     const { error } = await supabase.auth.signUp({
@@ -116,7 +123,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, ready, login, register, updateProfile, logout }}>
+    <AuthContext.Provider value={{ user, ready, login, loginWithOAuth, register, updateProfile, logout }}>
       {children}
     </AuthContext.Provider>
   )

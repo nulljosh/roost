@@ -62,3 +62,6 @@ and the detail page's mislabelled area/year stats.
 ## 2026-09-10 loading cleanup
 
 Removed the unused animate.css import and dependency. App routes load on demand; Leaflet CSS travels with the map. The main JavaScript bundle is 437 kB, with the 162 kB listings bundle separate. Build and both test suites pass. Existing test CI was verified in .github/workflows/test.yml.
+
+## From Notes (2026-09-12)
+- [ ] Sync UI/color palette more with portfolio and other projects

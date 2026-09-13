@@ -5,8 +5,10 @@
 Browse homes anywhere on earth.
 
 Roost is a map of what's for sale or for rent, filters that narrow it, and
-favourites that survive a reload. Every price in the local currency, every label in
-the local language. React and Vite, no backend beyond Supabase Auth.
+favourites that survive a reload. It exists because browsing homes abroad
+usually means guessing at a foreign currency and a site that only half
+translates, so every price renders in the local currency and every
+label in the local language. React and Vite, no backend beyond Supabase Auth, because nothing here needs a server to hold state that a browser can hold on its own.
 
 ## Problem
 
@@ -38,7 +40,8 @@ and a favorite is worth nothing to anyone but the person who set it.
 ## Design
 
 Dark Editorial, flat backgrounds, no gradients, blue accent, `tokens.css`
-shared with the portfolio design system.
+shared with the portfolio design system, because a listings app should look
+like a place to find a home, not like a brochure trying to sell you one.
 
 ## Stack
 

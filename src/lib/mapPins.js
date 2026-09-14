@@ -1,8 +1,6 @@
-// Every listing as its own pin turns into an unreadable pile of price pills at
-// city zoom, so show a subset until the map is zoomed in far enough to separate
-// them.
-// ponytail: a stride, not a cluster library. If pins ever need count bubbles
-// that split on click, that is when leaflet.markercluster earns its place.
+// Select a spread-out subset, then reject pills that would overlap at the
+// current zoom. Coordinates are projected into the same Web Mercator pixels
+// Leaflet uses, so the check works without measuring DOM nodes after render.
 
 const CAPS = [
   [11, 8],
@@ -18,13 +16,44 @@ export function capForZoom(zoom) {
   return Infinity
 }
 
-// Strides the list instead of slicing it, so the pins that survive are spread
-// across the city rather than bunched wherever the first N happen to sit.
-export function visibleForZoom(listings, zoom) {
+function pointFor(listing, zoom) {
+  const lat = Math.max(-85, Math.min(85, listing.lat)) * Math.PI / 180
+  const scale = 256 * 2 ** zoom
+  return {
+    x: (listing.lng + 180) / 360 * scale,
+    y: (1 - Math.log(Math.tan(Math.PI / 4 + lat / 2)) / Math.PI) / 2 * scale
+  }
+}
+
+export function visibleForZoom(listings, zoom, labelFor = () => '') {
   const cap = capForZoom(zoom)
-  if (listings.length <= cap) return listings
-  const step = listings.length / cap
+  const prioritized = []
+  const used = new Set()
+  if (listings.length > cap) {
+    const step = listings.length / cap
+    for (let i = 0; i < cap; i++) {
+      const index = Math.floor(i * step)
+      prioritized.push(listings[index])
+      used.add(index)
+    }
+  }
+  for (let i = 0; i < listings.length; i++) {
+    if (!used.has(i)) prioritized.push(listings[i])
+  }
+
   const out = []
-  for (let i = 0; i < cap; i++) out.push(listings[Math.floor(i * step)])
+  const boxes = []
+  for (const listing of prioritized) {
+    if (out.length >= cap) break
+    const point = pointFor(listing, zoom)
+    const width = labelFor(listing).length * 9 + 20
+    // The SVG is anchored at its bottom tip; keep a small breathing room.
+    const box = { left: point.x - width / 2 - 4, right: point.x + width / 2 + 4,
+      top: point.y - 34, bottom: point.y + 4 }
+    if (boxes.some(other => box.left < other.right && box.right > other.left &&
+      box.top < other.bottom && box.bottom > other.top)) continue
+    out.push(listing)
+    boxes.push(box)
+  }
   return out
 }

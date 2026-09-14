@@ -31,6 +31,7 @@ export const en = {
   area: 'Area',
   year_built: 'Year built',
   approx_locations: 'Map data is unavailable right now, so these homes are placed approximately.',
+  sample_listings: 'Sample listings generated for exploration. These are not homes for sale or rent.',
   no_results: 'No listings found',
   adjust_filters: 'Try adjusting your filters or search another place',
   new_badge: 'New',

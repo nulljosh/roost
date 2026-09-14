@@ -137,7 +137,7 @@
 .detail-description {
   font-size: 0.9375rem;
   line-height: 1.6;
-  color: var(--cream-dim);
+  color: var(--text2);
 }
 
 .detail-features {
@@ -152,7 +152,7 @@
   border-radius: 100px;
   border: 1px solid var(--border);
   font-size: 0.8125rem;
-  color: var(--cream-dim);
+  color: var(--text2);
 }
 
 .detail-meta-grid {

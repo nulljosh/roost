@@ -1,7 +1,7 @@
 .listings-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .listings-empty {
@@ -14,7 +14,7 @@
 .listings-empty h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--cream-dim);
+  color: var(--text);
 }
 
 @media (min-width: 640px) {
@@ -39,7 +39,11 @@
 /* Shown only when every Overpass mirror is down, so the addresses on screen are
    the place name and the pins are scattered from the centroid. */
 .listings-notice {
-  margin: 0 0 1rem;
-  font-size: 0.8125rem;
-  color: var(--muted);
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: 0.875rem;
+  color: var(--text2);
 }

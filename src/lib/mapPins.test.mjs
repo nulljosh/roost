@@ -1,7 +1,7 @@
 import assert from 'node:assert'
 import { visibleForZoom, capForZoom } from './mapPins.js'
 
-const listings = Array.from({ length: 60 }, (_, i) => ({ id: i, lat: 49 + i / 1000 }))
+const listings = Array.from({ length: 60 }, (_, i) => ({ id: i, lat: 49 + i / 1000, lng: -123 }))
 
 // The pile of overlapping price pills at city zoom is the whole reason this exists.
 assert.ok(visibleForZoom(listings, 12).length < listings.length, 'city zoom must thin the pins')
@@ -18,8 +18,14 @@ assert.notDeepEqual(shown, listings.slice(0, shown.length), 'subset must be spre
 assert.ok(shown[shown.length - 1].id > listings.length / 2, 'subset reaches the far end of the list')
 assert.equal(new Set(shown.map(l => l.id)).size, shown.length, 'no duplicate pins')
 
-// A short list is never padded or trimmed.
-assert.equal(visibleForZoom(listings.slice(0, 5), 11).length, 5)
+// Even a short list can collide at city zoom.
+assert.equal(visibleForZoom(listings.slice(0, 5), 11).length, 1)
 assert.equal(capForZoom(20), Infinity)
+
+// Dense neighborhoods must not draw several price pills in the same pixels.
+const dense = Array.from({ length: 20 }, (_, id) => ({ id, lat: 49, lng: -123 }))
+assert.equal(visibleForZoom(dense, 12, () => 'CA$500K').length, 1)
+const separate = Array.from({ length: 4 }, (_, id) => ({ id, lat: 49, lng: -123 + id * 0.1 }))
+assert.equal(visibleForZoom(separate, 12, () => 'CA$500K').length, 4)
 
 console.log('mapPins: ok')

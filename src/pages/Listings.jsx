@@ -23,6 +23,7 @@ export default function Listings() {
   return (
     <div className="page">
       <FilterBar resultCount={filtered.length} />
+      <p className="listings-notice">{t('sample_listings')}</p>
       {streetsUnavailable && <p className="listings-notice">{t('approx_locations')}</p>}
       <MapView listings={filtered} favorites={favorites} place={place} />
       <div className="listings-grid">

@@ -9,6 +9,7 @@
   position: relative;
   aspect-ratio: 16 / 11;
   overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .listing-card-img img {
@@ -30,9 +31,9 @@
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(58, 42, 32, 0.6);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
-  color: var(--text);
+  color: #3A2A20;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -45,7 +46,7 @@
 }
 
 .fav-btn.active {
-  color: var(--clay);
+  color: #96654E;
 }
 
 .listing-type-badge {
@@ -60,7 +61,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--cream-dim);
+  color: #fff;
 }
 
 .listing-new-badge {
@@ -94,7 +95,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.8125rem;
-  color: var(--cream-dim);
+  color: var(--text2);
   margin-bottom: 0.5rem;
 }
 

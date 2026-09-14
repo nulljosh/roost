@@ -25,7 +25,8 @@ function MapMarkers({ listings, favorites }) {
   const [zoom, setZoom] = useState(() => 12)
   const map = useMapEvents({ zoomend: () => setZoom(map.getZoom()) })
 
-  return visibleForZoom(listings, zoom).map(listing => {
+  return visibleForZoom(listings, zoom,
+    listing => listingFormatters(listing, language, t).priceCompact).map(listing => {
     const fmt = listingFormatters(listing, language, t)
     return (
       <Marker
@@ -61,6 +62,14 @@ function RecenterOn({ place }) {
 }
 
 export default function MapView({ listings, favorites, place }) {
+  const [dark, setDark] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches)
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-color-scheme: dark)')
+    const onChange = () => setDark(query.matches)
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [])
+
   return (
     <div className="map-container">
       <MapContainer
@@ -71,8 +80,12 @@ export default function MapView({ listings, favorites, place }) {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.esri.com/">Esri</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+          url={`https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${dark ? 'Dark' : 'Light'}_Gray_Base/MapServer/tile/{z}/{y}/{x}`}
         />
+        {!dark && <TileLayer
+          attribution='&copy; Esri'
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
+        />}
         <RecenterOn place={place} />
         <MapMarkers listings={listings} favorites={favorites} />
       </MapContainer>

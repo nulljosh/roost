@@ -1,48 +1,5 @@
 @import '../tokens.css';
 
-/* === CFA Palette === */
-:root {
-  --bg: #FFF3E8;
-  --bg2: #F6E3D2;
-  --text: #3A2A20;
-  --text2: rgba(58,42,32,0.72);
-  --text3: rgba(58,42,32,0.3);
-  --border: rgba(58,42,32,0.09);
-
-  --navy: #1A1A1A;
-  --navy-light: #2a2118;
-  --navy-lighter: #332920;
-  --cream-dim: rgba(255,248,240,0.65);
-  --muted: rgba(58,42,32,0.4);
-  --blue-dark: #96654E;
-  --blue: #B5836A;
-  --blue-light: #D2A88E;
-  --amber: #E3B778;
-  --green: #1a7f37;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1C1410;
-    --bg2: #2A1E17;
-    --text: #FFF8F0;
-    --text2: rgba(255,248,240,0.5);
-    --text3: rgba(255,248,240,0.3);
-    --border: rgba(255,248,240,0.09);
-    --border2: rgba(255,248,240,0.06);
-
-    --navy: #1A1A1A;
-    --navy-light: #2a2118;
-    --navy-lighter: #332920;
-    --cream: #FFF8F0;
-    --cream-dim: rgba(255,248,240,0.65);
-    --muted: rgba(255,248,240,0.4);
-    --blue-dark: #D2A88E;
-    --blue: #B5836A;
-    --blue-light: #E0BFA9;
-  }
-}
-
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -100,9 +57,9 @@ a:hover {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.625rem 1.5rem;
-  border-radius: 100px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  background: var(--bg2);
+  background: var(--surface);
   color: var(--text);
   font-family: var(--font);
   font-size: 0.875rem;
@@ -135,7 +92,7 @@ a:hover {
 }
 
 .btn-ghost {
-  background: transparent;
+  background: var(--surface);
   border-color: var(--border);
 }
 
@@ -175,7 +132,7 @@ a:hover {
   padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: var(--bg2);
+  background: var(--surface);
   color: var(--text);
   font-family: var(--font);
   font-size: 0.9375rem;
@@ -208,9 +165,9 @@ a:hover {
 
 /* Card */
 .card {
-  background: var(--bg2);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform 0.2s var(--spring);
 }
@@ -259,9 +216,9 @@ a:hover {
   align-items: center;
   gap: 0.375rem;
   padding: 0.5rem 1rem;
-  border-radius: 100px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--bg2);
+  background: var(--surface);
   color: var(--text2);
   font-size: 0.8125rem;
   font-family: var(--font);
@@ -341,7 +298,7 @@ a:hover {
 /* Page layout */
 .page {
   padding: 1rem;
-  padding-top: calc(60px + 1rem);
+  padding-top: calc(68px + 1rem);
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -357,9 +314,9 @@ a:hover {
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: var(--bg2);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--radius);
   padding: 2.5rem 2rem;
 }
 
@@ -433,13 +390,17 @@ a:hover {
 @media (min-width: 768px) {
   .page {
     padding: 1.5rem;
-    padding-top: calc(60px + 1.5rem);
+    padding-top: calc(68px + 1.5rem);
   }
+}
+
+@media (max-width: 700px) {
+  .page { padding-top: calc(112px + 1rem); }
 }
 
 @media (min-width: 1024px) {
   .page {
     padding: 2rem;
-    padding-top: calc(60px + 2rem);
+    padding-top: calc(68px + 2rem);
   }
 }

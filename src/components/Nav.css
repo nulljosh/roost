@@ -4,11 +4,11 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(58, 42, 32, 0.94);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  height: 60px;
+  height: 68px;
 }
 
 .nav-inner {
@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--cream);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
@@ -33,7 +33,7 @@
 }
 
 .nav-logo:hover {
-  color: var(--cream);
+  color: var(--text);
   transform: translateY(-1px);
 }
 
@@ -45,29 +45,29 @@
 
 .nav-link {
   padding: 0.5rem 1rem;
-  border-radius: 100px;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--cream-dim);
+  color: var(--text2);
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav-link:hover {
-  background: var(--navy-lighter);
-  color: var(--cream);
+  background: var(--surface-2);
+  color: var(--text);
 }
 
 .nav-link.active {
-  background: var(--blue-dark);
-  color: #fff;
+  background: var(--text);
+  color: var(--bg);
 }
 
 .nav-language {
   padding: 0.35rem 0.5rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-dim);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text2);
   font: inherit;
   font-size: 0.85rem;
   cursor: pointer;
@@ -76,4 +76,15 @@
 
 .nav-language option {
   color: initial;
+}
+
+@media (max-width: 700px) {
+  .nav { height: 112px; }
+  .nav-inner { flex-wrap: wrap; align-content: center; row-gap: 0.4rem; }
+  .nav-logo { font-size: 1.1rem; }
+  .nav-links { margin-left: auto; }
+  .nav-link { padding: 0.35rem 0.55rem; font-size: 0.78rem; }
+  .nav-language { max-width: 5.5rem; font-size: 0.78rem; }
+  .place-search { order: 3; flex: 0 0 100%; max-width: none; height: 36px; }
+  .place-results { width: 100%; }
 }

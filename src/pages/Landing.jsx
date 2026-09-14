@@ -34,58 +34,13 @@ function useRevealOnScroll() {
   return [ref, inView]
 }
 
-// A slow-drifting wall of listing photos behind the hero, same shape as the
-// bookrank landing. Built in JS because the column count depends on viewport
-// width; prefers-reduced-motion stops it in CSS.
-function buildWall(el) {
-  const urls = photos.map(u => u.replace('w=600&h=400', 'w=320&h=420'))
-  const cols = Math.max(4, Math.ceil(window.innerWidth / 220))
-  el.replaceChildren()
-  for (let c = 0; c < cols; c++) {
-    const col = document.createElement('div')
-    col.className = 'wall-col ' + (c % 2 ? 'down' : 'up')
-    col.style.setProperty('--dur', `${70 + c * 11}s`)
-    const slice = [...urls].sort(() => Math.random() - 0.5).slice(0, 5)
-    // Doubled so the loop is seamless.
-    slice.concat(slice).forEach(u => {
-      const img = new Image()
-      img.src = u
-      img.alt = ''
-      img.loading = 'lazy'
-      col.appendChild(img)
-    })
-    el.appendChild(col)
-  }
-}
-
 export default function Landing() {
-  const wallRef = useRef(null)
   const { t } = useI18n()
   const [statsRef, statsIn] = useRevealOnScroll()
   const [howRef, howIn] = useRevealOnScroll()
   const [langRef, langIn] = useRevealOnScroll()
   const [honestRef, honestIn] = useRevealOnScroll()
   const [ctaRef, ctaIn] = useRevealOnScroll()
-
-  useEffect(() => {
-    if (wallRef.current) buildWall(wallRef.current)
-  }, [])
-
-  // Parallax: the hero photo wall drifts slower than the page scrolls.
-  useEffect(() => {
-    if (prefersReducedMotion() || !wallRef.current) return
-    let ticking = false
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(() => {
-        if (wallRef.current) wallRef.current.style.transform = `translateY(${window.scrollY * 0.12}px)`
-        ticking = false
-      })
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   const stats = [
     [coverage.countries, t('stat_countries')],
@@ -104,7 +59,6 @@ export default function Landing() {
   return (
     <main className="landing">
       <section className="landing-hero">
-        <div className="hero-wall" ref={wallRef} aria-hidden="true" />
         <div className="landing-inner">
           <svg className="hero-icon" width="72" height="72" viewBox="0 0 1024 1024" aria-hidden="true">
             <path d="M512 216 880 528v40H144v-40Z" fill="#B5836A" />
@@ -118,6 +72,12 @@ export default function Landing() {
             <Link to="/login" className="btn btn-ghost">{t('sign_in')}</Link>
             <a href="https://github.com/nulljosh/roost" className="btn btn-ghost">GitHub</a>
           </div>
+        </div>
+        <div className="hero-preview" aria-label={t('sample_listings')}>
+          <img src={photos[0]} alt="" fetchPriority="high" />
+          <img src={photos[1]} alt="" />
+          <img src={photos[2]} alt="" />
+          <span>{t('sample_listings')}</span>
         </div>
       </section>
 

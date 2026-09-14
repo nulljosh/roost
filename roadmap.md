@@ -42,8 +42,8 @@ the local market, protected routes waiting for the session instead of bouncing
 signed-in people to /login, the filter row wrapping instead of looking clipped,
 and the detail page's mislabelled area/year stats.
 
-- [ ] Pins still collide in dense pockets. Thinning by zoom only reduces the
-      count; real declutter needs collision detection or a cluster library.
+- [x] Price pins now use Web Mercator pixel collision checks at each zoom, so
+      dense pockets show separated pills without adding a cluster library.
 - [ ] No land check on generated coordinates. Street anchors are on land by
       construction, but the no-streets fallback can still put a home in water.
 - [ ] Service worker serves the previous build for one load after a deploy.

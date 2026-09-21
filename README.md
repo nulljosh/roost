@@ -20,6 +20,8 @@ currency, every label in the local language.
 |---|---|
 | ![Browse](docs/screenshots/browse.jpg) | ![Listing](docs/screenshots/listing.jpg) |
 
+<img src="progress.svg" width="460">
+
 ## Features
 
 - Find any place on earth through Nominatim. No API key

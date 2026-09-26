@@ -3,21 +3,15 @@
 
 /* Roost keeps its warm brown accent on the shared portfolio geometry and type. */
 :root {
-  --bg: #FAF8F4;
-  --bg2: #F1ECE5;
   --surface: #FFFFFF;
   --surface-2: #F6F1EA;
-  --text: #3A2A20;
-  --text2: #685A50;
-  --text3: #77675B;
-  --text-dim: #685A50;
-  --border: #E6DCD0;
+  --text-dim: var(--text2);
+  --cream-dim: var(--text2);
+  --muted: var(--text2);
 
   --navy: #1A1A1A;
   --navy-light: #2a2118;
   --navy-lighter: #332920;
-  --cream-dim: var(--text2);
-  --muted: var(--text2);
   --blue-dark: #96654E;
   --blue: #B5836A;
   --blue-light: #D2A88E;
@@ -27,16 +21,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1C1714;
-    --bg2: #29211B;
     --surface: #29211B;
     --surface-2: #352A22;
-    --text: #FFF8F0;
-    --text2: #D2C2B4;
-    --text3: #B9A696;
-    --text-dim: #D2C2B4;
-    --border: #49392D;
     --border2: rgba(255,248,240,0.06);
+    --text-dim: var(--text2);
 
     --navy: #1A1A1A;
     --navy-light: #2a2118;
